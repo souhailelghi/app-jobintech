@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Password Protect</title>
+  <link rel="stylesheet" href="style.css"> 
+  <style>
+    body {
+      background-color: #f4f4f4;
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .login-card {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .login-card h1 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    input {
+      margin-bottom: 15px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .login-submit{
+      background-color: #4caf50;
+      color: #fff;
+      cursor: pointer;
+      border: none;
+      padding: 10px 0;
+      border-radius: 40px;
+    }
+    .register-button {
+      background-color: #af4c7d;
+      color: #fff;
+      cursor: pointer;
+      border: none;
+      padding: 10px 0;
+      border-radius: 40px;
+    }
+
+    .login-submit:hover,
+    .register-button:hover {
+      background-color: #45a049;
+    }
+
+    .login-help a {
+      color: #3498db;
+      text-decoration: none;
+    }
+
+    .login-help a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-card">
+    <h1 >Login </h1>
+    <h5 style="color: red">incorrect email or password</h5>
+
+    <form action="/login/auth" method="POST">
+      <input type="text" name="email" placeholder="email">
+      <input type="password" name="MotDePasse" placeholder="Mot De Passe">
+      <button type="submit" class="login login-submit">
+        Login
+      </button>
+    </form>
+
+    <button style="margin-top: 10px; width: 400px" type="button" class="login login-submit" onclick="redirectToRegister()">
+      Register
+    </button>
+
+    <script>
+      function redirectToRegister() {
+        window.location.href = '/register';
+      }
+    </script>
+  </div>
+</body>
+</html>

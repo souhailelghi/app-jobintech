@@ -6,17 +6,17 @@ exports.up = function(knex) {
       table.string('Prenom', 50);
       table.string('Email', 100);
       table.string('MotDePasse', 255);
-      table.enum('type', ['candidat', 'formateur']).notNullable();
+      table.enum('type', ['candidat', 'formateur','recruteur']).notNullable();
     })
     .createTable('Candidat', function(table) {
       table.increments('ID').primary();
-      table.integer('UserID').unique();
+      table.integer('UserID').unsigned().unique();
       table.string('CV', 255);
       table.foreign('UserID').references('Users.ID');
     })
     .createTable('Competence', function(table) {
       table.increments('ID').primary();
-      table.integer('CandidatID');
+      table.integer('CandidatID').unsigned();
       table.string('Langage', 50);
       table.string('Framework', 50);
       table.string('Niveau', 20);
@@ -31,8 +31,8 @@ exports.up = function(knex) {
     })
     .createTable('Postulation', function(table) {
       table.increments('ID').primary();
-      table.integer('CandidatID');
-      table.integer('OffreID');
+      table.integer('CandidatID').unsigned();
+      table.integer('OffreID').unsigned();
       table.date('DatePostulation');
       table.string('Statut', 50);
       table.text('Feedback');
@@ -41,14 +41,14 @@ exports.up = function(knex) {
     })
     .createTable('Formateur', function(table) {
       table.increments('ID').primary();
-      table.integer('UserID').unique();
+      table.integer('UserID').unsigned().unique();
       table.string('DomaineExpertise', 100);
       table.foreign('UserID').references('Users.ID');
     })
     .createTable('Evaluation', function(table) {
       table.increments('ID').primary();
-      table.integer('CandidatID');
-      table.integer('FormateurID');
+      table.integer('CandidatID').unsigned();
+      table.integer('FormateurID').unsigned();
       table.integer('Note');
       table.text('Commentaire');
       table.date('DateEvaluation');
@@ -57,7 +57,7 @@ exports.up = function(knex) {
     })
     .createTable('Recruteur', function(table) {
       table.increments('ID').primary();
-      table.integer('UserID').unique();
+      table.integer('UserID').unsigned().unique();
       table.string('NomEntreprise', 100);
       table.foreign('UserID').references('Users.ID');
     });
@@ -67,8 +67,7 @@ exports.down = function(knex) {
   return knex.schema
     .dropTableIfExists('Recruteur')
     .dropTableIfExists('Evaluation')
-    
-.dropTableIfExists('Formateur')
+    .dropTableIfExists('Formateur')
     .dropTableIfExists('Postulation')
     .dropTableIfExists('Offre')
     .dropTableIfExists('Competence')

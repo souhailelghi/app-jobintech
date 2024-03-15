@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Profile Page</title>
+<style>
+    /* General Styles */
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    /* Profile Page Styles */
+    .profile-info {
+        margin-bottom: 20px;
+    }
+
+    .profile-info label {
+        font-weight: bold;
+    }
+
+    .profile-info input[type="text"] {
+        width: 100%;
+        padding: 5px;
+        margin-bottom: 10px;
+    }
+
+    /* Job Offers Page Styles */
+    .job-offer {
+        border-bottom: 1px solid #ccc;
+        padding: 10px 0;
+    }
+
+    .job-offer h2 {
+        margin-bottom: 5px;
+    }
+</style>
+</head>
+<body>
+<img src="ach.jpg" alt="">
+<!-- Profile Page -->
+<img src="resum.jpg" alt="" style="max-width: 200px;">
+<form action="/logout" method="post">
+    <button type="submit">Logout</button>
+</form>
+<div class="container">
+    <h1>Profile Page</h1>
+    <form id="edit-profile-form" style="display: none;">
+        <div class="profile-info">
+            <label for="edit-name">Name:</label>
+         
+            <input type="text" id="edit-name" name="edit-name">
+        </div>
+        <div class="profile-info">
+            <label for="edit-skills">Skills:</label>
+            <input type="text" id="edit-skills" name="edit-skills">
+        </div>
+        <div class="profile-info">
+            <label for="edit-photo">Photo:</label>
+            <input type="file" id="edit-photo" name="edit-photo">
+        </div>
+        <button type="submit">Save</button>
+    </form>
+  
+    <div class="profile-info">
+        <label for="name">Name:</label>
+        <span id="name">souhail elghiouane</span>
+    </div>
+    <div class="profile-info">
+        <label for="email">Email:</label>
+        <span id="email">ca@gmail.com</span>
+    </div>
+    <div class="profile-info">
+        <label for="skills">Skills:</label>
+        <span id="skills"> JavaScript node.js express.js react.ts </span>
+    </div>
+    <div class="profile-info">
+        <img id="profile-photo" src="resum.jpg" alt="Photo" style="max-width: 200px;">
+    </div>
+    <button id="edit-profile-button">Edit Profile</button>
+</div>
+
+<!-- Job Offers Page -->
+<div class="container" id="job-offers-container">
+    <h1>Job Offers</h1>
+    <div class="job-offer">
+        <h2>Frontend Developer</h2>
+        <p>Company: XYZ Corp</p>
+        <p>Location: New York</p>
+        <p>Skills required: HTML, CSS, JavaScript</p>
+        <button>Apply Now</button>
+    </div>
+    <div class="job-offer">
+        <h2>Backend Developer</h2>
+        <p>Company: ABC Inc</p>
+        <p>Location: San Francisco</p>
+        <p>Skills required: Python, Django, SQL</p>
+        <button>Apply Now</button>
+    </div>
+</div>
+
+<script>
+    document.getElementById('edit-profile-button').addEventListener('click', function() {
+        document.getElementById('edit-profile-form').style.display = 'block';
+        document.getElementById('edit-name').value = document.getElementById('name').innerText;
+        document.getElementById('edit-skills').value = document.getElementById('skills').innerText;
+        document.getElementById('edit-profile-button').style.display = 'none'; // hide edit profile button
+        document.getElementById('job-offers-container').style.display = 'none'; // hide job offers section
+    });
+
+    document.getElementById('edit-profile-form').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent form submission
+        var newName = document.getElementById('edit-name').value;
+        var newSkills = document.getElementById('edit-skills').value;
+        var newPhoto = document.getElementById('edit-photo').files[0]; // Get the selected file
+        var reader = new FileReader();
+        
+        reader.onload = function(event) {
+            var photoURL = event.target.result;
+            document.getElementById('name').innerText = newName;
+            document.getElementById('skills').innerText = newSkills;
+            document.getElementById('edit-profile-form').style.display = 'none';
+            document.getElementById('edit-profile-button').style.display = 'block'; // show edit profile button
+            document.getElementById('job-offers-container').style.display = 'block'; // show job offers section
+        };
+
+    });
+</script>
+
+</body>
+</html>
