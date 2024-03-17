@@ -5,18 +5,19 @@ const bcrypt = require('bcrypt');
 const app = express();
 const port = 3001;
 
+//try git 
 const knex = knexLib(require('./knexfile')['development']);
 
 // Set EJS as the view engine
 app.set('view engine', 'ejs');
 
-// Use body-parser middleware to parse JSON and url-encoded data
+// Use body-parser middleware to parse JSON and url-encoded data ...
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
 
-// Define routes for each page
+// Define routes for each page 
 app.get('/', (req, res) => {
   res.render('index');
 });
